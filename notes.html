@@ -11,39 +11,11 @@ title: Notes
     </div>
 
     <b-collapse class="index-area" visible id="index">
-      <ul v-cloak class="list -root">
-        <li class="index" v-for="indexLv1 in indexTree">
-          <a class="text hoveranimation">[[ indexLv1.text ]]</a>
-          <ul class="list" v-if="indexLv1.children.length > 0">
-            <li class="index" v-for="indexLv2 in indexLv1.children">
-              <a v-if="!indexLv2.href" class="text hoveranimation">[[ indexLv2.text ]]</a>
-              <a v-else-if="indexLv2.href.substring(1) !== activeNote" class="link hoveranimation" v-bind:href="indexLv2.href" v-on:click="seeNote">[[ indexLv2.text ]]</a>
-              <a v-else class="link hoveranimation active" v-bind:href="indexLv2.href" v-on:click="seeNote">[[ indexLv2.text ]]</a>
-              <ul class="list" v-if="indexLv2.children.length > 0">
-                <li class="index" v-for="indexLv3 in indexLv2.children">
-                  <a v-if="!indexLv3.href" class="text hoveranimation">[[ indexLv3.text ]]</a>
-                  <a v-else-if="indexLv3.href.substring(1) !== activeNote" class="link hoveranimation" v-bind:href="indexLv3.href" v-on:click="seeNote">[[ indexLv3.text ]]</a>
-                  <a v-else class="link hoveranimation active" v-bind:href="indexLv3.href" v-on:click="seeNote">[[ indexLv3.text ]]</a>
-                  <ul class="list" v-if="indexLv3.children.length > 0">
-                    <li class="index" v-for="indexLv4 in indexLv3.children">
-                      <a v-if="!indexLv4.href" class="text hoveranimation">[[ indexLv4.text ]]</a>
-                      <a v-else-if="indexLv4.href.substring(1) !== activeNote" class="link hoveranimation" v-bind:href="indexLv4.href" v-on:click="seeNote">[[ indexLv4.text ]]</a>
-                      <a v-else class="link hoveranimation active" v-bind:href="indexLv4.href" v-on:click="seeNote">[[ indexLv4.text ]]</a>
-                      <ul class="list" v-if="indexLv4.children.length > 0">
-                        <li class="index" v-for="indexLv5 in indexLv4.children">
-                          <a v-if="!indexLv5.href" class="text hoveranimation">[[ indexLv5.text ]]</a>
-                          <a v-else-if="indexLv5.href.substring(1) !== activeNote" class="link hoveranimation" v-bind:href="indexLv5.href" v-on:click="seeNote">[[ indexLv5.text ]]</a>
-                          <a v-else class="link hoveranimation active" v-bind:href="indexLv5.href" v-on:click="seeNote">[[ indexLv5.text ]]</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <template v-cloak v-for="index in indexList">
+        <a v-if="!index.link" v-bind:class="'depth-' + index.depth" class="text hoveranimation">[[ index.text ]]</a>
+        <a v-else-if="index.link.substring(1) !== activeNote" v-bind:class="'depth-' + index.depth" class="link hoveranimation" v-bind:href="index.link" v-on:click="openNote">[[ index.text ]]</a>
+        <a v-else class="link hoveranimation active" v-bind:class="'depth-' + index.depth" v-bind:href="index.link" v-on:click="openNote">[[ index.text ]]</a>
+      </template>
     </b-collapse>
   </div>
 
@@ -57,18 +29,16 @@ title: Notes
     {%- for note in site.notes -%}
       {%- assign note_path = note.relative_path | remove_first: '_notes/' | remove: '.md' -%}
       {%- assign note_path_arr = note_path | replace: '_', ' ' | split: '/' -%}
-      {%- assign title_raw = note_path_arr | last -%}
       {%- assign title_path = '' -%}
       {%- for note_path_element in note_path_arr -%}
-        {%- if note_path_element != title_raw -%}
+        {%- if note_path_element != note_path_arr.last -%}
           {%- capture title_path -%}{{ title_path }} » {{ note_path_element | capitalize }}{%- endcapture -%}
         {%- endif -%}
       {%- endfor -%}
-      {%- assign title = title_raw | remove: '0' | remove: '1' | remove: '2' | remove: '3' | remove: '4' | remove: '5' | remove: '6' | remove: '7' | remove: '8' | remove: '9' | strip -%}
       {%- assign note_id = note_path | replace: '/', '-' -%}
       <div v-cloak v-if="activeNote === '{{ note_id }}'" class="note-content">
         <span>{{ title_path | remove_first: ' » ' }}</span>
-        <h1>{{ title | capitalize }}</h1>
+        <h1>{{ note_path_arr.last | capitalize }}</h1>
         <div class="note-metadata">
           {%- if note.doc -%}
             <div class="onlinedoc">

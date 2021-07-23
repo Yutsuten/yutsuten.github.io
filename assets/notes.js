@@ -25,18 +25,46 @@ class IndexTree {
 }
 
 
+function getFilteredIndexList (indexList, search) {
+  if (search) {
+    let keywords = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(' ')
+    let filter = keywords.map(keyword => `(?=.*${keyword})`).join('')
+    let filterRegex = new RegExp(`^${filter}.*$`, 'i')
+    return indexList.filter(index => filterRegex.test(index))
+  }
+  return indexList
+}
+
+function generateIndex (indexTree, depth) {
+  /* Process the index tree into an index list */
+  let indexList = []
+  indexTree.forEach((index) => {
+    indexList.push({
+      text: index.text,
+      link: index.href,
+      depth: depth,
+    })
+    if (index.children.length) {
+      indexList = indexList.concat(
+        generateIndex(index.children, depth + 1)
+      )
+    }
+  })
+  return indexList
+}
+
 new Vue({
   el: '#notes',
   delimiters: ['[[', ']]'],
   data: {
     search: '',
     activeNote: window.location.href.split('#')[1],
-    notesIndexList: [],
-    indexTree: [],
+    rawIndexList: [],
+    indexList: [],
     menuShown: true
   },
   methods: {
-    seeNote: function (click) {
+    openNote: function (click) {
       let targetHash = click.target.hash
       if (targetHash) {
         this.activeNote = targetHash.substr(1)
@@ -77,25 +105,20 @@ new Vue({
       this.menuShown = isJustShown
     },
     updateIndexTree: function () {
-      let filteredIndexList
-      let search = this.search.trim().replace(/\s+/g, ' ')
-      if (this.search) {
-        let keywords = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').split(' ')
-        let filter = keywords.map(keyword => `(?=.*${keyword})`).join('')
-        let filterRegex = new RegExp(`^${filter}.*$`, 'i')
-        filteredIndexList = this.notesIndexList.filter(index => filterRegex.test(index))
-      } else {
-        filteredIndexList = this.notesIndexList
-      }
+      let filteredIndexList = getFilteredIndexList(
+        this.rawIndexList,
+        this.search.trim().replace(/\s+/g, ' ')
+      )
 
       let indexTree = new IndexTree()
       filteredIndexList.forEach(path => indexTree.addNode(path))
-      this.indexTree = indexTree.root.children
+
+      this.indexList = generateIndex(indexTree.root.children, 0)
     }
   },
   mounted: function () {
     let rawIndexDataElement = document.getElementById('raw-index-data')
-    this.notesIndexList = JSON.parse(rawIndexDataElement.textContent)
+    this.rawIndexList = JSON.parse(rawIndexDataElement.textContent)
     rawIndexDataElement.remove()
 
     window.addEventListener('keydown', this.keydown)

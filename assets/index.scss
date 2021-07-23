@@ -9,10 +9,12 @@ body {
 
 a {
   color: var(--link);
+  text-indent: 0;
 }
 
 a:hover {
   color: var(--link-hover);
+  text-decoration: none;
 }
 
 input {
@@ -113,6 +115,30 @@ ul {
   border-radius: 3px;
 }
 
+#index {
+  > .depth-1 { padding-left: 1em; }
+  > .depth-2 { padding-left: 2em; }
+  > .depth-3 { padding-left: 3em; }
+  > .depth-4 { padding-left: 4em; }
+  > .depth-5 { padding-left: 5em; }
+}
+
+/* Index styling */
+#index {
+  > a {
+    display: block;
+  }
+
+  > .depth-0 {
+    font-weight: 600;
+    font-size: 1.5rem;
+  }
+
+  > .text {
+    font-weight: bold;
+  }
+}
+
 /* Landing page stuff */
 .landingpage-block {
   margin-top: 80px;
@@ -128,14 +154,6 @@ ul {
 
 .big-button > .title {
   font-size: 2.3rem;
-}
-
-a {
-  text-indent: 0;
-}
-
-a:hover {
-  text-decoration: none;
 }
 
 :root {
