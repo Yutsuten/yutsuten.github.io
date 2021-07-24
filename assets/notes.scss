@@ -52,54 +52,33 @@
     overflow-y: auto;
   }
 
-  > .list.-root {
-    padding-left: 0;
-    list-style-type: none;
-  }
-
-  > .list.-root > .index {
-    font-size: 1.5rem;
-    font-weight: 500;
-  }
-
-  > .list.-root > .index .text {
-    font-weight: bold;
-    color: var(--text);
-  }
-
-  > .list.-root > .index > .text {
+  > .depth-0 {
     font-weight: 600;
-    color: var(--text);
+    font-size: 1.5rem;
   }
 
-  .list {
-    margin-left: 0;
-    margin-bottom: 0;
-    padding-left: 15px;
-    list-style-type: square;
+  > .depth-1 { padding-left: 1em; }
+  > .depth-2 { padding-left: 2em; }
+  > .depth-3 { padding-left: 3em; }
+  > .depth-4 { padding-left: 4em; }
+  > .depth-5 { padding-left: 5em; }
+
+  > .text {
+    font-weight: bold;
   }
 
-  .index {
-    font-size: 1.0rem;
-    font-weight: 400;
-  }
-
-  .index > .text,
-  .index > .link {
+  > .text,
+  > .link {
     display: block;
   }
 
-  .index > .link:focus {
+  > .link:focus {
     color: var(--link-active);
   }
 
-  .index > .link.active {
+  > .link.active {
     font-weight: bold;
     color: var(--link-active);
-  }
-
-  .index > .text {
-    cursor: default;
   }
 }
 
