@@ -1,5 +1,6 @@
 ---
 doc: https://vuejs.org/v2/guide/index.html
+update: 2021-07-24
 ---
 
 {% raw %}
@@ -38,31 +39,6 @@ var app = new Vue({
   el: '#app',
   data: {
     message: 'You loaded this page on ' + new Date().toLocaleString()
-  }
-})
-```
-
-## Loop (for)
-
-```html
-<div id="app">
-  <ol>
-    <li v-for="todo in todos">
-      {{ todo.text }}
-    </li>
-  </ol>
-</div>
-```
-
-```javascript
-var app = new Vue({
-  el: '#app',
-  data: {
-    todos: [
-      { text: 'Learn JavaScript' },
-      { text: 'Learn Vue' },
-      { text: 'Build something awesome' }
-    ]
   }
 })
 ```
