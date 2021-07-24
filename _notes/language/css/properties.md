@@ -1,4 +1,5 @@
 ---
+update: 2021-07-24
 ---
 
 ## Common
@@ -6,61 +7,73 @@
 ### Positioning
 
 ```css
-display: block;
-position: relative;
-height: 0;
-width: 0;
-top: 0;
-bottom: 0;
-left: 0;
-right: 0;
+.positioning {
+  display: block;
+  position: relative;
+  height: 0;
+  width: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 ```
 
 ### Spacing
 
 ```css
-margin: 0 0 0 0;
-padding: 0 0 0 0;
-overflow: auto;
+.spacing {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  overflow: auto;
+}
 ```
 
 ### Colouring
 
 ```css
-color: #FFF;
-background-color: #333;
-background: linear-gradient(to bottom, #FFF 0%, #000 100%);
-border-style: dotted;
-border-width: 3px;
-border-color: blue;
-border-radius: 3px;
-box-shadow: 0 0 0 #000;
-outline: none;
+.colouring {
+  color: #FFF;
+  background-color: #333;
+  background: linear-gradient(to bottom, #FFF 0%, #000 100%);
+  border-style: dotted;
+  border-width: 3px;
+  border-color: blue;
+  border-radius: 3px;
+  box-shadow: 0 0 0 #000;
+  outline: none;
+}
 ```
 
 ### Font
 
 ```css
-font-size: 1.2rem;
-font-weight: 400;
-text-decoration: none;
-white-space: pre-wrap;
-word-wrap: break-word;
+.font {
+  font-size: 1.2rem;
+  font-weight: 400;
+  text-decoration: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 ```
 
 ### Text formatting
 
 ```css
-text-align: justify;
-text-indent: 1.5rem;
+.text-formatting {
+  text-align: justify;
+  text-indent: 1.5rem;
+}
 ```
 
 ### Special
 
 ```css
-cursor: default;
-list-style-type: disclosure-closed;
-user-select: none;
+.special {
+  cursor: default;
+  list-style-type: disclosure-closed;
+  user-select: none;
+}
 ```
 
 ## Page layout example
