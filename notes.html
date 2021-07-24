@@ -1,58 +1,77 @@
 ---
-layout: note
 title: Notes
 ---
 
-<div class="row">
-  <div class="col-12 col-md-4 col-lg-3 menu-area" visible id="menu">
-    <div class="row search-bar">
-      <input type="text" class="input col-10 col-md-12" id="search" v-model="search" v-on:input="searchUpdated" v-on:focus="showMenu" placeholder="Type to search" autofocus />
-      <b-button class="col-2 menutoggler d-md-none" v-b-toggle.index><i class="fas fa-search"></i></b-button>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include head_common.html %}
+    <link rel="stylesheet" href="{{ site.baseurl }}{% link assets/index.scss %}" media="screen">
+    <link rel="stylesheet" href="{{ site.baseurl }}{% link assets/notes.scss %}" media="screen">
+  </head>
+  <body>
+    <div class="container-fluid" id="notes">
+      <div class="row">
+        <div class="col-12 col-md-4 col-lg-3 menu-area" visible id="menu">
+          <div class="row search-bar">
+            <input type="text" class="input col-10 col-md-12" id="search" v-model="search" v-on:input="searchUpdated" v-on:focus="showMenu" placeholder="Type to search" autofocus />
+            <b-button class="col-2 menutoggler d-md-none" v-b-toggle.index><i class="fas fa-search"></i></b-button>
+          </div>
 
-    <b-collapse class="index-area" visible id="index">
-      <template v-cloak v-for="index in indexList">
-        <a v-if="!index.link" v-bind:class="'depth-' + index.depth" class="text hoveranimation">[[ index.text ]]</a>
-        <a v-else-if="index.link.substring(1) !== activeNote" v-bind:class="'depth-' + index.depth" class="link hoveranimation" v-bind:href="index.link" v-on:click="openNote">[[ index.text ]]</a>
-        <a v-else class="link hoveranimation active" v-bind:class="'depth-' + index.depth" v-bind:href="index.link" v-on:click="openNote">[[ index.text ]]</a>
-      </template>
-    </b-collapse>
-  </div>
-
-  <div class="col-12 col-md-8 col-lg-9 content-area" id="content">
-    <div v-if="typeof activeNote !== 'string'" class="note-content" id="home">
-      <h1>Home</h1>
-      <p>Welcome to my programming notes!</p>
-      <p>There are currently {{ site.notes.size }} notes.
-      The last update was at {{ 'today' | date: '%Y/%m/%d' }}.</p>
-    </div>
-    {%- for note in site.notes -%}
-      {%- assign note_path = note.relative_path | remove_first: '_notes/' | remove: '.md' -%}
-      {%- assign note_path_arr = note_path | replace: '_', ' ' | split: '/' -%}
-      {%- assign title_path = '' -%}
-      {%- for note_path_element in note_path_arr -%}
-        {%- if note_path_element != note_path_arr.last -%}
-          {%- capture title_path -%}{{ title_path }} » {{ note_path_element | capitalize }}{%- endcapture -%}
-        {%- endif -%}
-      {%- endfor -%}
-      {%- assign note_id = note_path | replace: '/', '-' -%}
-      <div v-cloak v-if="activeNote === '{{ note_id }}'" class="note-content">
-        <span>{{ title_path | remove_first: ' » ' }}</span>
-        <h1>{{ note_path_arr.last | capitalize }}</h1>
-        <div class="note-metadata">
-          {%- if note.doc -%}
-            <div class="onlinedoc">
-              <a rel="nofollow" href="{{ note.doc }}">External documentation</a>
-            </div>
-          {%- endif -%}
-          {%- if note.update -%}
-            <div class="last-updated">
-              <b>Last updated:</b> {{ note.update | date: '%Y/%m/%d' }}
-            </div>
-          {%- endif -%}
+          <b-collapse class="index-area" visible id="index">
+            <template v-cloak v-for="index in indexList">
+              <a v-if="!index.link" v-bind:class="'depth-' + index.depth" class="text hoveranimation">[[ index.text ]]</a>
+              <a v-else-if="index.link.substring(1) !== activeNote" v-bind:class="'depth-' + index.depth" class="link hoveranimation" v-bind:href="index.link" v-on:click="openNote">[[ index.text ]]</a>
+              <a v-else class="link hoveranimation active" v-bind:class="'depth-' + index.depth" v-bind:href="index.link" v-on:click="openNote">[[ index.text ]]</a>
+            </template>
+          </b-collapse>
         </div>
-        {{ note.content }}
+
+        <div class="col-12 col-md-8 col-lg-9 content-area" id="content">
+          <div v-if="typeof activeNote !== 'string'" class="note-content" id="home">
+            <h1>Home</h1>
+            <p>Welcome to my programming notes!</p>
+            <p>There are currently {{ site.notes.size }} notes.
+            The last update was at {{ 'today' | date: '%Y/%m/%d' }}.</p>
+          </div>
+          {%- for note in site.notes -%}
+            {%- assign note_id = note.relative_path | remove_first: '_notes/' | replace: '/', '-' -%}
+            {%- assign note_path = note_id | replace: '_', ' ' -%}
+            {%- assign note_title = note_path | split: '-' | last -%}
+            {%- assign note_path = note_path | remove: note_title | split: '-' | join: ' » ' -%}
+            <div v-cloak v-if="activeNote === '{{ note_id | remove_first: '.md' }}'" class="note-content">
+              <span>{{ note_path | upcase }}</span>
+              <h1>{{ note_title | remove_first: '.md' | capitalize }}</h1>
+              <div class="note-metadata">
+                {%- if note.doc -%}
+                  <div class="onlinedoc">
+                    <a rel="nofollow" href="{{ note.doc }}">External documentation</a>
+                  </div>
+                {%- endif -%}
+                {%- if note.update -%}
+                  <div class="last-updated">
+                    <b>Last updated:</b> {{ note.update | date: '%Y/%m/%d' }}
+                  </div>
+                {%- endif -%}
+              </div>
+              {{ note.content }}
+            </div>
+          {%- endfor -%}
+        </div>
       </div>
+    </div>
+
+    <script type="application/json" id="raw-index-data">
+    {%- assign index_data = '' -%}
+    {%- for note in site.notes -%}
+      {%- assign note_path_arr = note.relative_path | split: '/' -%}
+      {%- assign filename = note_path_arr.last | prepend: '!' -%}
+      {%- assign note_path = note.relative_path | replace: note_path_arr.last, filename -%}
+      {%- capture index_data -%}{{ index_data }},{{ note_path }}{%- endcapture -%}
     {%- endfor -%}
-  </div>
-</div>
+    ["{{ index_data | slice: 1, index_data.size | remove: '_notes/' | remove: '.md' | split: ',' | sort | join: '","' | remove: '!' }}"]
+    </script>
+
+    <script src="{{ site.baseurl }}{% link assets/notes.js %}"></script>
+  </body>
+</html>
