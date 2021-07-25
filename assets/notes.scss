@@ -57,11 +57,22 @@
     font-size: 1.5rem;
   }
 
-  > .depth-1 { padding-left: 1em; }
-  > .depth-2 { padding-left: 2em; }
-  > .depth-3 { padding-left: 3em; }
-  > .depth-4 { padding-left: 4em; }
-  > .depth-5 { padding-left: 5em; }
+  > .depth-1 { padding-left: 0.6em; }
+  > .depth-2 { padding-left: 1.6em; }
+  > .depth-3 { padding-left: 2.6em; }
+  > .depth-4 { padding-left: 3.6em; }
+  > .depth-5 { padding-left: 4.6em; }
+
+  > .text.depth-1::before,
+  > .text.depth-2::before,
+  > .text.depth-3::before,
+  > .text.depth-4::before,
+  > .text.depth-5::before {
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;
+    padding-right: 3px;
+    content: '\f0da';
+  }
 
   > .text {
     font-weight: bold;
@@ -79,6 +90,7 @@
   > .link.active {
     font-weight: bold;
     color: var(--link-active);
+    background-color: var(--base00);
   }
 }
 
