@@ -1,4 +1,5 @@
 ---
+name: xdg-open
 doc: https://wiki.archlinux.org/title/XDG_MIME_Applications
 update: 2021-07-22
 ---

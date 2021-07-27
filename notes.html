@@ -36,12 +36,16 @@ title: Notes
           </div>
           {%- for note in site.notes -%}
             {%- assign note_id = note.relative_path | remove_first: '_notes/' | replace: '/', '-' -%}
-            {%- assign note_path = note_id | replace: '_', ' ' -%}
-            {%- assign note_title = note_path | split: '-' | last -%}
-            {%- assign note_path = note_path | remove: note_title | split: '-' | join: ' » ' -%}
+            {%- assign file_name = note.relative_path | split: '/' | last -%}
+            {%- assign note_path = note_id | remove_first: file_name | replace: '_', ' ' | split: '-' | join: ' » ' -%}
+            {%- if note.name -%}
+              {%- assign note_title = note.name -%}
+            {%- else -%}
+              {%- assign note_title = note.title | replace: '_', ' ' -%}
+            {%- endif -%}
             <div v-cloak v-if="activeNote === '{{ note_id | remove_first: '.md' }}'" class="note-content">
               <span>{{ note_path | upcase }}</span>
-              <h1>{{ note_title | remove_first: '.md' | capitalize }}</h1>
+              <h1>{{ note_title | capitalize }}</h1>
               <div class="note-metadata">
                 {%- if note.doc -%}
                   <div class="onlinedoc">

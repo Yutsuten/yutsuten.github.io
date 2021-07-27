@@ -1,4 +1,6 @@
 ---
+name: ssh-agent
+update: 2021-07-27
 ---
 
 The `ssh-agent` manages your keys,

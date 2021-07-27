@@ -1,5 +1,7 @@
 ---
+name: rxvt-unicode
 doc: https://wiki.archlinux.org/index.php/Rxvt-unicode
+update: 2021-07-27
 ---
 
 ## Usage

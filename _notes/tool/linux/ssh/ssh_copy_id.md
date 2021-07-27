@@ -1,4 +1,6 @@
 ---
+name: ssh-copy-id
+update: 2021-07-27
 ---
 
 Used to log into a remote server by using SSH keys.

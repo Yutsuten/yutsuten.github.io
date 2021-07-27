@@ -1,5 +1,7 @@
 ---
+name: rev-list
 doc: https://git-scm.com/docs/git-rev-list
+update: 2021-07-27
 ---
 
 List commits that are reachable by following the parent links from the given commit.
