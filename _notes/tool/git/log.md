@@ -1,5 +1,6 @@
 ---
 doc: https://git-scm.com/docs/git-log
+update: 2021-07-27
 ---
 
 ## Usage
@@ -16,4 +17,10 @@ Show full history of a line range.
 
 ```shell
 git log -L25,+1:'path/file.txt'
+```
+
+Find a commit that deleted / edited a file.
+
+```shell
+git log --full-history -- myfile
 ```
