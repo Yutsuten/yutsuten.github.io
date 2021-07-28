@@ -1,20 +1,31 @@
 ---
+update: 2021-07-28
 ---
 
+## Usage
+
+Merges a source branch into the current branch.
+
 ```shell
-# Merge a branch into another
-(develop) $ git merge new-feature
+git merge OPTIONS SOURCE_BRANCH
+```
 
-# Force creating a new commit for the merge
-(develop) $ git merge --no-ff new-feature
+| Option | Description |
+| --- | --- |
+| `--squash` | Perform the merge but do not commit. |
+| `--no-ff` | Force creating a merge commit. |
+| `--abort` | Abort a merge with conflicts. |
 
-# Abort a merge with conflicts
-git merge --abort
+### Conflict resolution
 
-# After fixing conflicts, commit merge
-git commit --no-edit  # (Recommended) Default merge message
+Make sure all conflicts were resolved by running:
 
-# Squash all commits into one
-git merge --squash new-feature
-git commit
+```shell
+git grep -HE '<{7} HEAD'
+```
+
+To commit with the default merge message:
+
+```shell
+git commit --no-edit
 ```

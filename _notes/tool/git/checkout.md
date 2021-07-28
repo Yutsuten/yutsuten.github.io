@@ -1,7 +1,23 @@
 ---
+update: 2021-07-28
 ---
 
-## Undo changes in file
+## Usage
+
+Change the position of HEAD.
+
+```shell
+git checkout OPTIONS BRANCH_NAME
+```
+
+| Option | Description |
+| --- | --- |
+| `-b` | Change to a new branch. |
+
+### Restoring files
+
+*Note:* If using Git 2.23 or newer,
+`git restore` seems to be a more adequate command.
 
 ```shell
 git checkout -- .
