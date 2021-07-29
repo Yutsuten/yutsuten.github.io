@@ -1,5 +1,5 @@
 ---
-update: 2021-04-14
+update: 2021-07-29
 ---
 
 ## Usage
@@ -8,7 +8,7 @@ update: 2021-04-14
 git diff OPTIONS COMMIT -- PATH
 ```
 
-| Commit | Description |
+| Option | Description |
 | --- | --- |
 | `--cached` `--staged` | Show changes in the staging area. |
 | `--word-diff` | Change to show word diff mode. |

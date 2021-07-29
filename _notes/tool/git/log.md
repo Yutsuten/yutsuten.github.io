@@ -1,6 +1,6 @@
 ---
 doc: https://git-scm.com/docs/git-log
-update: 2021-07-27
+update: 2021-07-29
 ---
 
 ## Usage
@@ -8,10 +8,18 @@ update: 2021-07-27
 Show the latest commits.
 
 ```shell
-git log
-git log -n 5       # Last 5 commits
-git log --oneline  # Simplified output
+git log OPTIONS
 ```
+
+| Option | Description |
+| --- | --- |
+| `-n` | Output only the last N commits. |
+| `-L` | Get the logs of the given line range and file. |
+| `--oneline` | Abbreviate commit messages to one line. |
+| `--merges` | Output only merge commits. |
+| `--full-history` | Do not prune some history. |
+
+### Examples
 
 Show full history of a line range.
 
