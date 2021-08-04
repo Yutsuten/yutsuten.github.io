@@ -1,5 +1,5 @@
 ---
-update: 2021-07-20
+update: 2021-08-04
 ---
 
 ## Usage
@@ -12,6 +12,7 @@ find LOCATION OPTIONS
 | --- | --- |
 | `-name` | Base of file name to be matched. |
 | `-type` | File type to be matched. `d` for directory, `f` for file, `l` for symbolic link. |
+| `-not` `!` | Negates the next condition. |
 | `-empty` | File is empty and is either a regular file or a directory. |
 | `-delete` | Delete files (make sure to put it last). |
 | `-print` | Print the full file name on the standard output. |

@@ -1,5 +1,5 @@
 ---
-update: 2021-05-19
+update: 2021-08-04
 ---
 
 ## Usage
@@ -12,12 +12,13 @@ On options, hyphen is optional.
 
 | Option | Description |
 | --- | --- |
-| `-c` | Create tar file. |
-| `-x` | Extract tar file. |
-| `-C` | Set current directory. |
-| `-f` | Set the name of the file to create / extract. |
-| `-z` | Enable gnuzip compression. |
-| `-v` | Verbosely list files processed. |
+| `-c` `--create` | Create tar file. |
+| `-x` `--extract` `--get` | Extract tar file. |
+| `-t` `--list` | List the contents of an archive. |
+| `-C` `--directory` | Set current directory. |
+| `-f` `--file` | Set the name of the file to create / extract. |
+| `-z` `--gzip` `--gunzip` `--ungzip` | Enable gnuzip. |
+| `-v` `--verbose` | Verbosely list files processed. |
 
 Gzipped files can have `.tgz` or `.tar.gz` extensions.
 
@@ -34,4 +35,10 @@ Extract gzipped file:
 
 ```shell
 tar -xzf file.tgz
+```
+
+List files in tar file:
+
+```shell
+tar -tf file.tar
 ```
