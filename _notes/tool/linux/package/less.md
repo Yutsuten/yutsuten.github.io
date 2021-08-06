@@ -1,5 +1,5 @@
 ---
-update: 2021-06-08
+update: 2021-08-06
 ---
 
 ## Usage
@@ -10,12 +10,16 @@ less OPTIONS FILE
 
 | Option | Description |
 | --- | --- |
-| `-n` | Supress line numbers |
 | `-S` | Chop long lines |
 | `-X` | Do not clean the screen |
 | `-F` | Quit if one screen |
 | `-R` | Show colors |
+| `-N` | Show line numbers |
+| `-n` | Supress line numbers |
 | `+` | Automatically run commands |
+
+It is also possible to toggle any option by typing `-` and its character.
+For example, to show line numbers: `-N`.
 
 ### Commands
 
