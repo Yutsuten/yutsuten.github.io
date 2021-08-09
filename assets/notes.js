@@ -80,12 +80,20 @@ new Vue({
     },
     keydown: function (e) {
       let ctrl = e.ctrlKey
+      let enter = e.keyCode === 13
       let backspace = e.keyCode === 8
       let slash = e.keyCode === 191
       let space = e.keyCode === 32
       let letter = e.keyCode >= 65 && e.keyCode <= 90
       if (!ctrl && (backspace || slash || space || letter)) {
         document.getElementById('search').focus()
+      }
+      if (document.activeElement.id === 'search' && document.activeElement.value.trim().length && enter) {
+        let index = document.getElementById('index')
+        let links = index.getElementsByClassName('link')
+        if (links.length) {
+          links[0].click()
+        }
       }
     },
     searchUpdated: function () {
