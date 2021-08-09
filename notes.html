@@ -18,7 +18,7 @@ title: Notes
             <b-button class="col-2 menutoggler d-md-none" v-b-toggle.index><i class="fas fa-search"></i></b-button>
           </div>
 
-          <b-collapse class="index-area" visible id="index">
+          <b-collapse class="index-area" visible id="index" tabindex="-1">
             <template v-cloak v-for="index in indexList">
               <a v-if="!index.link" v-bind:class="'depth-' + index.depth" class="text hoveranimation">[[ index.text ]]</a>
               <a v-else-if="index.link.substring(1) !== activeNote" v-bind:class="'depth-' + index.depth" class="link hoveranimation" v-bind:href="index.link" v-on:click="openNote">[[ index.text ]]</a>
