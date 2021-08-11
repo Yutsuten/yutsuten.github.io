@@ -1,15 +1,23 @@
 ---
 doc: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
-update: 2021-02-23
+update: 2021-08-11
 ---
 
 ## Usage
 
-`start`, `enable`, `stop` or `disable` the service:
+Root privileges are often needed when running `systemctl` commands.
 
 ```shell
-sudo systemctl enable someservice
+systemctl ACTION my.service
 ```
+
+| Action | Description |
+| --- | --- |
+| `start` | Start the service. |
+| `stop` | Stop the service. |
+| `restart` | Restart the service. |
+| `enable` | Enable automatic service startup on boot. |
+| `disable` | Disable automatic service startup on boot. |
 
 ## Creation
 
