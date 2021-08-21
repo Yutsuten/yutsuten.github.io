@@ -49,3 +49,12 @@ pip install --user --upgrade bazel-dist/*.whl
 ```
 
 Anki then can be executed by typing `anki` on the terminal.
+
+### Enable Fcitx support
+
+Find the system's and Anki's `platforminputcontexts` directory with `find`
+and symlink fcitx plugin.
+
+```shell
+ln -s /usr/lib/qt/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so ~/.local/lib/python3.9/site-packages/PyQt5/Qt5/plugins/platforminputcontexts/libfcitxplatforminputcontextplugin.so
+```
